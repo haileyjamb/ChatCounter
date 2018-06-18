@@ -1,45 +1,47 @@
 package edu.handong.csee.java.chatcounter;
 
-
+import java.util.ArrayList;
+import java.util.HashMap;
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.DefaultParser;
 import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
-import org.apache.commons.cli.Option.Builder;
 import java.util.*;
 
 /**
  * ChatCounter class has main method. It works with DataReader and DataWriter classes
  */
+
 public class ChatCounter {
 
 	String inputPath;
 	String outputPath;
 	boolean help;
+	
+	int numThreads;	//thread pool
 
 	/**
 	 * main method gets command line parameters and give to DataReader
 	 * then, give what is given by DataReader to DataWriter as an arraylist
 	 */
+
 	public static void main(String[] args) {
 
 		ChatCounter myChatCounter = new ChatCounter();
 		myChatCounter.run(args);
 	}
-	
-	private void run(String[] args) {
-		Options options = createOptions();
 
+	private void run(String[] args) {
+		Options options = createOptions();	
 		if(parseOptions(options, args)){
 			if (help){
 				printHelp(options);
 				return;
 			}
-
+			
 			DataReader dataReader = new DataReader();
-
 			HashMap<String, ArrayList<Message>> messages = dataReader.getData(inputPath);
 			for(String key:messages.keySet())
 			{
@@ -53,31 +55,29 @@ public class ChatCounter {
 			List<String> ids = sortByValue(counter);
 
 			ArrayList<String> linesToWrite = new ArrayList<String>();
-
 			int i=0;
 			for(String key:ids) {
 				linesToWrite.add(key+","+counter.get(key));
 			}
 			DataWriter writer = new DataWriter();
 			writer.writeAFile(linesToWrite, outputPath);
-			System.out.println("Program is terminated.");
+			System.out.println("Your program is terminated. (This message is shown because you turned on -v option!");
 
 		}
 	}
 
 	private boolean parseOptions(Options options, String[] args) {
-
 		CommandLineParser parser = new DefaultParser();
 
 		try {
 
 			CommandLine cmd = parser.parse(options, args);
-
 			outputPath = cmd.getOptionValue("o");
 			inputPath = cmd.getOptionValue("i");
 			help = cmd.hasOption("h");
+			numThreads = Integer.parseInt(cmd.getOptionValue("t"));
 
-		} catch (Exception e) {	//Exception --> '0'
+		} catch (Exception e) {
 			printHelp(options);
 			return false;
 		}
@@ -85,8 +85,9 @@ public class ChatCounter {
 		return true;
 	}
 
-	private Option createOptions() {
-		Option options = new Option();
+	// Definition stage
+	private Options createOptions() {
+		Options options = new Options();
 
 		options.addOption(Option.builder("i").longOpt("input")
 				.desc("Set a path of a directory or a file to display")
@@ -97,19 +98,26 @@ public class ChatCounter {
 
 		options.addOption(Option.builder("o").longOpt("output")
 				.desc("a file path name where the count results are saved")
-				.hasArg()    
+				.hasArg()     // this option is intended not to have an option value but just an option
 				.argName("a file path")
-				.required() 
+				.required() // this is an optional option. So disabled required().
 				.build());
 
 		options.addOption(Option.builder("h").longOpt("help")
 				.desc("Help")
 				.build());
+		
+		options.addOption(Option.builder("t").longOpt("numThreads")
+				.desc("Enter the number of threads")
+				.hasArg()
+				.argName("Thread number")
+				.required()
+				.build());
 
 		return options;
 	}
 
-	private void printHelp(Options options) {	//has to print out the help statement
+	private void printHelp(Options options) {//print out the help message
 
 		HelpFormatter formatter = new HelpFormatter();
 		String header = "CLI test program";
@@ -138,5 +146,4 @@ public class ChatCounter {
 		}
 		return counter;
 	}
-
 }
