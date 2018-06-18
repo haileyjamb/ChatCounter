@@ -10,13 +10,10 @@ plugins {
     // Apply the java-library plugin to add support for Java Library
     id 'java-library'
 }
-apply plugin: 'java'
-
-sourceCompatibility = JavaVersion.VERSION_1_7
-targetCompatibility = JavaVersion.VERSION_1_7
 
 apply plugin: 'application'
 mainClassName = "edu.handong.csee.java.chatcounter.ChatCounter"
+
 dependencies {
     // This dependency is exported to consumers, that is to say found on their compile classpath.
     api 'org.apache.commons:commons-math3:3.6.1'

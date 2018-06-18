@@ -6,7 +6,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.ListIterator;
 
 /**
  * DataReader class gets parameters and read files, then according to file name(txt,csv)
@@ -18,7 +17,7 @@ public class DataReader {
 	HashMap<String, ArrayList<Message>> messages = new HashMap<String, ArrayList<Message>>();
 	HashMap<String, Integer> idxcounter = new HashMap<String,Integer>();
 	/**
-	 * 
+	 * Make a directory and get and read files 
 	 */
 	public HashMap<String, ArrayList<Message>> getData(String strDir){
 

@@ -1,6 +1,5 @@
 package edu.handong.csee.java.chatcounter;
 
-import java.util.*;
 
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
@@ -9,6 +8,7 @@ import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.Option.Builder;
+import java.util.*;
 
 /**
  * ChatCounter class has main method. It works with DataReader and DataWriter classes
@@ -28,7 +28,7 @@ public class ChatCounter {
 		ChatCounter myChatCounter = new ChatCounter();
 		myChatCounter.run(args);
 	}
-
+	
 	private void run(String[] args) {
 		Options options = createOptions();
 
@@ -39,7 +39,7 @@ public class ChatCounter {
 			}
 
 			DataReader dataReader = new DataReader();
-			
+
 			HashMap<String, ArrayList<Message>> messages = dataReader.getData(inputPath);
 			for(String key:messages.keySet())
 			{
@@ -53,7 +53,7 @@ public class ChatCounter {
 			List<String> ids = sortByValue(counter);
 
 			ArrayList<String> linesToWrite = new ArrayList<String>();
-			
+
 			int i=0;
 			for(String key:ids) {
 				linesToWrite.add(key+","+counter.get(key));
@@ -66,7 +66,7 @@ public class ChatCounter {
 	}
 
 	private boolean parseOptions(Options options, String[] args) {
-		
+
 		CommandLineParser parser = new DefaultParser();
 
 		try {
