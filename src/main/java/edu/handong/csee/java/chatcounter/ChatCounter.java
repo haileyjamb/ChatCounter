@@ -1,6 +1,7 @@
 package edu.handong.csee.java.chatcounter;
 
 import java.util.ArrayList;
+
 import java.util.HashMap;
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;

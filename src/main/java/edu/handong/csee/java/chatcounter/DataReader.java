@@ -34,6 +34,8 @@ public class DataReader {
 				messages = readFilesCSV(files);	
 			}
 		}	//wanna make this to thread reading csv
+			//how do I connect these?
+		
 
 		return messages;
 	}
@@ -47,7 +49,7 @@ public class DataReader {
 	private File[] getListOfFilesFromDirectory(File dataDir) {
 
 		for(File file:dataDir.listFiles()) {
-			//System.out.println(file.getAbsolutePath());
+			System.out.println(file.getAbsolutePath());
 		}
 		return dataDir.listFiles();
 	}	//only read txt files
