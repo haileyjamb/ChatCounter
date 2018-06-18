@@ -75,7 +75,7 @@ public class ChatCounter {
 			outputPath = cmd.getOptionValue("o");
 			inputPath = cmd.getOptionValue("i");
 			help = cmd.hasOption("h");
-			numThreads = Integer.parseInt(cmd.getOptionValue("t"));
+			numThreads = Integer.parseInt(cmd.getOptionValue("c"));
 
 		} catch (Exception e) {
 			printHelp(options);
@@ -107,7 +107,7 @@ public class ChatCounter {
 				.desc("Help")
 				.build());
 		
-		options.addOption(Option.builder("t").longOpt("numThreads")
+		options.addOption(Option.builder("c").longOpt("numThreads")
 				.desc("Enter the number of threads")
 				.hasArg()
 				.argName("Thread number")

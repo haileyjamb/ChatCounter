@@ -1,5 +1,4 @@
 package edu.handong.csee.java.chatcounter;
-
 /**
  * 
  * Message class worksn as a struct in C programming lang. 
