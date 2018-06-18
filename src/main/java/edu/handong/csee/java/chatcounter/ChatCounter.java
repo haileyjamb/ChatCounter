@@ -8,6 +8,7 @@ import org.apache.commons.cli.DefaultParser;
 import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
+import org.apache.commons.cli.Option.Builder;
 
 /**
  * ChatCounter class has main method. It works with DataReader and DataWriter classes
@@ -85,7 +86,7 @@ public class ChatCounter {
 	}
 
 	private Option createOptions() {
-		Option options = new Options();
+		Option options = new Option();
 
 		options.addOption(Option.builder("i").longOpt("input")
 				.desc("Set a path of a directory or a file to display")
@@ -137,4 +138,5 @@ public class ChatCounter {
 		}
 		return counter;
 	}
+
 }
