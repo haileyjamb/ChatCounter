@@ -16,7 +16,7 @@ import org.apache.commons.csv.CSVRecord;
  * Class to read CSV files using threads
  *
  */
-public class CSVThreads extends DataReader implements Runnable{
+public class CSVThreads implements Runnable{
 
 	private File filepath = null;
 	public HashMap<String, ArrayList<Message>> messages = new HashMap<String, ArrayList<Message>>();
