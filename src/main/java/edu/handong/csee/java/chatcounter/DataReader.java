@@ -15,23 +15,28 @@ import java.util.regex.Pattern;
  * if it's not redundant, then put it in. --> then, return all the messages
  */
 public class DataReader {
+	
+	
 
 	HashMap<String, ArrayList<Message>> messages = new HashMap<String, ArrayList<Message>>();
 	HashMap<String, Integer> idxcounter = new HashMap<String,Integer>();
+	
+	CSVThreads threads = new CSVThreads();
+	
 	/**
 	 * Make a directory and get and read files 
 	 */
 	public HashMap<String, ArrayList<Message>> getData(String strDir){
 
-		File myDirectory = getDirectory(strDir);
+		File myDirectory = getDirectory(strDir);	//make a directory	
 		File[] files = getListOfFilesFromDirectory(myDirectory);
-		for(File f:files)			//
+		for(File f:files)
 		{
 			System.out.println("-------"+f.getName()+"-------");
 			if(f.getName().endsWith(".txt")) 
 				messages = readFilesTXT(files);
 			else if(f.getName().endsWith(".csv")){
-				messages = readFilesCSV(files);	
+				messages = threads(files);	
 			}
 		}	//wanna make this to thread reading csv
 			//how do I connect these?
